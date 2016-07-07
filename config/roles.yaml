@@ -19,11 +19,11 @@ roles:
       - type: shell
         inline: |-
           ( /opt/puppetlabs/puppet/bin/gem list | grep puppetclassify || /opt/puppetlabs/puppet/bin/gem install puppetclassify );
-          cd /vagrant/puppet
+          cd /vagrant/config/puppet
           /opt/puppetlabs/bin/r10k puppetfile install
           /opt/puppetlabs/puppet/bin/puppet apply \
-            --modulepath /vagrant/puppet/modules:/opt/puppetlabs/puppet/modules \
-            /vagrant/puppet/manifests
+            --modulepath /vagrant/config/puppet/modules:/opt/puppetlabs/puppet/modules \
+            /vagrant/config/puppet/manifests
   agent:
     private_networks:
       - ip: '0.0.0.0'
