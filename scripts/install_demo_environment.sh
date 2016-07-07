@@ -7,7 +7,8 @@ if ! [ `uname -s` == "Darwin" ]; then
   exit 1
 fi
 
-[ -d $demo_pwd ] || git clone https://github.com/puppetlabs/puppetconf-partner-demo-env.git $demo_pwd
+[ -d $demo_pwd ] || git clone https://github.com/puppetlabs/puppetconf-partner-demo-env.git $demo_pwd || \
+  (echo "git is not installed. Follow the XCode instructions that appeared on your screen to install git and then re-run the installer command." && exit 2)
 
 # Make sure we have sudo permissions
 echo "Type in your local password (What you use to log into you Mac):"
