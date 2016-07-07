@@ -2,6 +2,6 @@ forge "https://forgeapi.puppetlabs.com"
 
 mod 'vagrant',
   :git => 'https://github.com/ccaum/puppet-vagrant',
-  :ref => 'ab94213a704829796e46763fc5b1ee589da6ce92',
+  :ref => '0626945177a451acea2d76fce007ba65ce4925f8'
 
 mod 'skoblenick-virtualbox'
