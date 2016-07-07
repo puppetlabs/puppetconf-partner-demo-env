@@ -6,7 +6,7 @@
     * [Who can use this tool](#who-can-use-this-tool)
        * [System Requirements](#system-requirements)
 2. [Quick Start](#quick-start)
-3.  * [Mac Host Machines](#mac-host-machines)
+    * [Mac Host Machines](#mac-host-machines)
     * [Non-Mac Host Machines](#non-mac-host-machines)
 3.  [Using the Demo Environment](#using-the-demo-environment)
     * [Access the Puppet Server Command line](#access-the-puppet-server-command-line)
