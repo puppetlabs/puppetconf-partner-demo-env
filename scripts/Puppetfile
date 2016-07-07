@@ -1,7 +1,4 @@
 forge "https://forgeapi.puppetlabs.com"
 
-mod 'vagrant',
-  :git => 'https://github.com/ccaum/puppet-vagrant',
-  :ref => '7213e5f9740c8288debf0ff9ae2fbd4dfd3ae331'
-
+mod 'unibet-vagrant'
 mod 'skoblenick-virtualbox'
