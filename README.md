@@ -3,13 +3,13 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-    *[Who can use this tool](#who-can-use-this-tool)
+    * [Who can use this tool](#who-can-use-this-tool)
 2. [Quick Start](#quick-start)
     * [Non-Mac Host Machines](#non-mac-host-machines)
-3  [Using the Demo Environment](#using-the-demo-environment)
+3.  [Using the Demo Environment](#using-the-demo-environment)
     * [Access the Puppet Server Command line](#access-the-puppet-server-command-line)
     * [Access the Puppet Enterprise Console](#access-the-puppet-enterprise-console)
-    * [Snapshoting the Environment](#snapshotting-the-environment)
+    * [Snapshotting the Environment](#snapshotting-the-environment)
 4. [Extending the Demo Environment](#extending-the-demo-environment)
     * [Adding VMs](#adding-vms)
     * [Adding VM Roles](#adding-vm-roles)
@@ -124,7 +124,7 @@ When you log in, you may notice that there's just one node listed: `master`.
 Not a bad start, but also not a great example of Puppet in action. In the next
 section, you'll learn how to add some additional nodes to manage.
 
-### Snapshoting the Environment
+### Snapshotting the Environment
 
 Once you finish provisioning the demo environment that will host the demos you
 want to give, it is recommended you snapshot the environment so you can quickly
