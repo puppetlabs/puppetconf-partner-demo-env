@@ -1,4 +1,4 @@
-demo_pwd="`pwd`/pe-demo-env"
+demo_pwd="`pwd`/puppetconf-partner-demo-env"
 cwd=`pwd`
 username=`whoami`
 
@@ -7,7 +7,7 @@ if ! [ `uname -s` == "Darwin" ]; then
   exit 1
 fi
 
-[ -d $demo_pwd ] || git clone https://github.com/puppetlabs-pmmteam/pe-demo-env.git $demo_pwd
+[ -d $demo_pwd ] || git clone https://github.com/puppetlabs/puppetconf-partner-demo-env.git $demo_pwd
 
 # Make sure we have sudo permissions
 echo "Type in your local password (What you use to log into you Mac):"
