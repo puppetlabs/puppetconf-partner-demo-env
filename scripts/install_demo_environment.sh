@@ -22,12 +22,15 @@ cd $demo_pwd/scripts
 librarian-puppet install
 cd $cwd
 
-sudo FACTER_username=$username puppet apply --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp
+sudo FACTER_username=$username puppet apply --detailed-exitcodes --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp || \
+  (echo "Puppet failed to run. Try rerunning the installer command. Please contact carl@puppet.com for help." && exit 3)
 
 
 cat <<End-of-message
 -------------------------------------
 The demo environment should now be operational.
+If you have questions or run into problems, please
+contact Carl Caum <carl@puppet.com>
 
 A directory named puppetconf-partner-demo-env has been created
 for you. Go into that directory 
