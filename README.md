@@ -3,16 +3,19 @@
 #### Table of Contents
 
 1. [Overview](#overview)
+    *[Who can use this tool](#who-can-use-this-tool)
 2. [Quick Start](#quick-start)
+    * [Non-Mac Host Machines](#non-mac-host-machines)
+3  [Using the Demo Environment](#using-the-demo-environment)
+    * [Access the Puppet Server Command line](#access-the-puppet-server-command-line)
     * [Access the Puppet Enterprise Console](#access-the-puppet-enterprise-console)
-4. [Creating a New Demo](#creating-a-new-demo)
+    * [Snapshoting the Environment](#snapshotting-the-environment)
+4. [Extending the Demo Environment](#extending-the-demo-environment)
     * [Adding VMs](#adding-vms)
     * [Adding VM Roles](#adding-vm-roles)
     * [Adding Vagrant Boxes](#adding-vagrant-boxes)
     * [Modifying the PE Master](#modifying-the-pe-master)
         * [Puppetfile](#puppetfile)
-    * [Using YAML ERB templates](#using-yaml-erb-templates)
-
 
 ## Overview
 
@@ -91,7 +94,7 @@ following command.
 The master.vm machine will take a considerable amount of time to install the
 Puppet Enterprise master.
 
-### Access the Puppet server's command line
+### Access the Puppet server command line
 
 From the puppetconf-partner-demo-env directory on your terminal application,
 run the following command to SSH into the Puppet master.
@@ -121,6 +124,33 @@ When you log in, you may notice that there's just one node listed: `master`.
 Not a bad start, but also not a great example of Puppet in action. In the next
 section, you'll learn how to add some additional nodes to manage.
 
+### Snapshoting the Environment
+
+Once you finish provisioning the demo environment that will host the demos you
+want to give, it is recommended you snapshot the environment so you can quickly
+return to a good state after you give a demo. The `vagrant snapshot` command
+will do that for you.
+
+For each of the VMs in your demo environment, run the following command:
+
+        $ vagrant snapshot save <vm-name> base
+
+Restore the snapshot with
+
+        $ vagrant snapshot restore <vm-name> base
+
+See a list of snapshots available with
+
+        $ vagrant snapshot list
+
+## Extending the Demo Environment
+
+This demo environment can be extended by
+
+* Adding virtual machines
+* Adding roles to auto-configure VMs upon creation
+* Adding VM images
+
 ### Adding VMs
 
 Open the **config/vms.yaml** file.  Inside, specify a list of
@@ -138,6 +168,9 @@ all the VMs you'll need using a format something like this:
             box:  "puppetlabs/centos-7.0-64-nocm"
             roles: [ "agent", "example_role" ]
 
+For a complete list of Vagrant boxes that can be used for the **box** parameter, browse Atlas' [Vagrant Cloud](https://atlas.hashicorp.com/boxes/search?utm_source=vagrantcloud.com&vagrantcloud=1)
+
+To add a Vagrant box you've made yourself, see the [Adding vagrant boxes](#adding-vagrant-boxes) section in this README
 
 ### Adding VM roles
 
