@@ -29,21 +29,20 @@ cat <<End-of-message
 -------------------------------------
 The demo environment should now be operational.
 
-A directory named pe-demo-env has been created
+A directory named puppetconf-partner-demo-env has been created
 for you. Go into that directory 
-with `cd pe-demo-env`,then you can use the 
+with `cd puppetconf-partner-demo-env`,then you can use the 
 following commands to operate the environment.
-
-To see a list of available demo environments. run
-  $ vagrant demo list
-
-To select one or ore demo environments, run
-  $ vagrant demo use demo_1,demo_2
 
 To spin up the demo environment VMs, run
   $ vagrant up
 
 To get IP addresses to connect to the demo hosts, run
   $ vagrant hosts list
+
+To destroy the demo environemnt VMs, run
+  $ vagrant destroy
+or
+  $ vagrant destroy -f #destroy all without asking
 -------------------------------------
 End-of-message
