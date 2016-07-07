@@ -27,7 +27,7 @@ any outside infrastructure.
 If you are using Mac OS X, the following command will install Puppet, Virtualbox, Vagrant, and the
 necessary vagrant plugins
 
-      $ curl -L https://github.com/puppetlabs/puppetconf-partner-demo-env/pe-demo-install-script | bash
+      $ curl -L https://raw.githubusercontent.com/puppetlabs/puppetconf-partner-demo-env/master/scripts/install_demo_environment.sh | bash
 
 Note, you might be asked to accept the XCode EULA during the running of the
 script. Just accept it and re-run the script if it quits early.
