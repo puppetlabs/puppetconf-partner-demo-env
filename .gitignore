@@ -1,0 +1,3 @@
+.vagrant
+.pe_build
+puppet/Puppetfile.lock

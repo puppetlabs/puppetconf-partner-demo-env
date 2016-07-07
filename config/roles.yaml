@@ -1,0 +1,39 @@
+---
+roles:
+  master:
+    private_networks:
+      - ip: '0.0.0.0'
+        auto_network: true
+    providers:
+      - type: virtualbox
+        customize:
+          - [modifyvm, !ruby/sym id, '--memory', 4096]
+          - [modifyvm, !ruby/sym id, '--ioapic', 'on']
+          - [modifyvm, !ruby/sym id, '--cpus', '4']
+    provisioners:
+      - type: shell
+        inline: "iptables -F"
+      - type: hosts
+      - type: pe_bootstrap
+        role: !ruby/sym master
+      - type: shell
+        inline: |-
+          ( /opt/puppetlabs/puppet/bin/gem list | grep puppetclassify || /opt/puppetlabs/puppet/bin/gem install puppetclassify );
+          cd /vagrant/puppet
+          /opt/puppetlabs/bin/r10k puppetfile install
+          /opt/puppetlabs/puppet/bin/puppet apply \
+            --modulepath /vagrant/puppet/modules:/opt/puppetlabs/puppet/modules \
+            /vagrant/puppet/manifests
+  agent:
+    private_networks:
+      - ip: '0.0.0.0'
+        auto_network: true
+    providers:
+      - type: virtualbox
+    provisioners:
+      - type: shell
+        inline: "iptables -F"
+      - type: hosts
+      - type: pe_agent
+        master_vm: master
+
