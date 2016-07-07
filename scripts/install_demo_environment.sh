@@ -25,6 +25,12 @@ cd $cwd
 sudo FACTER_username=$username puppet apply --detailed-exitcodes --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp || \
   (echo "Puppet failed to run. Try rerunning the installer command. Please contact carl@puppet.com for help." && exit 3)
 
+if [ $? == 1 ]; then
+  echo "Puppet failed to set up the demo environment."
+  echo "Try rerunning the installer command."
+  echo "Please contact carl@puppet.com for help."
+  exit 3
+fi
 
 cat <<End-of-message
 -------------------------------------
