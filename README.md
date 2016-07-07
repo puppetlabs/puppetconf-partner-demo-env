@@ -16,18 +16,30 @@
 
 ## Overview
 
-This tool provides a quick way to bootstrap an example deployment of Puppet
-Enterprise, complete with a master and several managed nodes running different
-operating systems. It's intended to give you an easy way to demonstrate Puppet
-Enterprise, Puppet Apps, and partner integrations  on a single laptop without 
-any outside infrastructure.
+This tool provides a quick way to bootstrap a local deployment of Puppet
+Enterprise, complete with a Puppet Enterprise master. Multiple agents can be
+added for a multitude of operating systems.  It's intended to give you an easy
+way to demonstrate Puppet Enterprise and how it works with your technology.
+The entire environment is self contained on your workstation without any
+outside infrastructure required, though it does require access to the Internet.
+
+### Who can use this tool
+
+To use this tool, the operator will need to be pretty comfortable with
+operating command line interfaces as well as comfortable with working with YAML
+files if you want to extend this environment to include your own demo
+components.
+
+If you do intend to extend this environment with your own demo components (VMs
+and roles), it's recommend that you keep the changes in version control.
+Therefor, a basic understanding of git is recommended.
 
 ## Quick Start
 
 If you are using Mac OS X, the following command will install Puppet, Virtualbox, Vagrant, and the
-necessary vagrant plugins
+necessary Vagrant plugins
 
-**You may have to scroll to get the whole command**
+**You may have to scroll horizontally to get the whole command**
 
     curl -L https://raw.githubusercontent.com/puppetlabs/puppetconf-partner-demo-env/master/scripts/install_demo_environment.sh | bash
 
@@ -38,34 +50,68 @@ Once done, you can bring up a single master by running `vagrant up` in the
 *puppetconf-partner-demo-env* directory.  It's going to take a while for the VM
 to come up and be fully configured.
 
-The above insatllation script ensures the following software is installed on your system:
+The above installation script ensures the following software is installed on your system:
 
 * Puppet (gem if not already present)
 * librarian-puppet (gem)
 * Virtualbox 5.0
-* Vagrant (latest)
+* Vagrant
 * vagrant-oscar plugin
 * vagrant-vbox-snapshot plugin
 
 ### Non-Mac host machines
 
-You will need to install the following software:
+You will need to install the latest version of the following software:
 
-* [Vagrant (latest)](https://www.vagrantup.com)
+* [Vagrant](https://www.vagrantup.com)
 * [vagrant-oscar plugin](https://github.com/oscar-stack/oscar#installation)
-* [Virtualbox (latest)](https://www.virtualbox.org)
+* [Virtualbox](https://www.virtualbox.org)
 
 Clone the https://github.com/puppetlabs/puppetconf-partner-demo-env repository.
 
+## Using the demo environment
+
+The demo environment uses [Vagrant](https://www.vagrantup.com) to create
+on-demand, fully configured virtual infrastructure. ALL Vagrant commands should
+be run in the terminal of your choice in the `puppetconf-partner-demo-env`
+directory created from the set up process above.
+
+If you intend to add your own VMs to the environment, it is suggested that you
+fork this repository to your own github account.
+
+### Creating the environment
+
+Once you have the demo environment provisioned, you'll be ready to create the
+virtual machines. Go into your demo environment's directory
+(puppetconf-partner-demo-env) in your terminal application and run the
+following command.
+
+        $ vagrant up
+
+The master.vm machine will take a considerable amount of time to install the
+Puppet Enterprise master.
+
+### Access the Puppet server's command line
+
+From the puppetconf-partner-demo-env directory on your terminal application,
+run the following command to SSH into the Puppet master.
+
+        $ vagrant ssh master.vm
+
+Once you've logged into the master, you'll need to become root for most tasks.
+That can easily be done with the following command:
+
+        $ sudo su
+
 ### Access the Puppet Enterprise Console
 
-You'll be back at the command prompt, but the puppet master is still running in
-the background. Before you can get to the console, you'll need to figure out
-where it is:
+Before you can get to the console, you'll need to figure out what it's IP
+address is with the following command run from the puppetconf-partner-demo-env
+directory:
 
         $ vagrant hosts list
 
-The response should look something like `10.20.1.1 master`, meaning that the
+The response should look something like `10.20.1.1 master.vm master`, meaning that the
 `master` VM has the IP address of `10.20.1.1`. Next, just point your browser to
 `https://10.20.1.1` (or whatever the actual IP address is) and log in with the
 username `admin`, password `puppetlabs`. Don't worry if you get
@@ -73,7 +119,7 @@ a warning about the security certificate; that really won't affect anything.
 
 When you log in, you may notice that there's just one node listed: `master`.
 Not a bad start, but also not a great example of Puppet in action. In the next
-section, you'll add some additional nodes to manage.
+section, you'll learn how to add some additional nodes to manage.
 
 ### Adding VMs
 
@@ -110,10 +156,21 @@ of roles using a format something like this:
                 inline: |-
                   echo 'demo'
 
+Replace the `echo 'demo'` with any shell commands you wish to run. If you wish
+to run a shell script from a file in the repository, use the path parameter
+instead. e.g.
+
+          ...
+          example_role:
+            provisioners:
+              - type: shell
+                path: scripts/my_totally_awesome_script.sh
+
+      
 ### Adding vagrant boxes
 
 Create a new file **config/boxes.yaml** file. Inside, specify the list
-of roles using a format something like this: 
+of boxes using the following format.
 
         ---
         boxes:
@@ -125,8 +182,8 @@ Now your VM definitions can specify *rhel-70-x64-vbox* for the *box* parameter.
 
 You can specify Puppet code to run on the PE master **during vagrant
 provisioning**. This is useful to create node groups in the classifier, stage
-files and repositories, set up packages, and more.  Note this is entirely
-optional. 
+files and repositories, set up packages, and more. Note this is entirely
+optional.
 
 In the **puppet/manifests** directory there are a list of **.pp** files.  When
 Vagrant runs Puppet is run on the master during the provisioning processes, all
