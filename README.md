@@ -4,6 +4,7 @@
 
 1. [Overview](#overview)
     * [Who can use this tool](#who-can-use-this-tool)
+       * [System Requirements](#system-requirements)
 2. [Quick Start](#quick-start)
     * [Non-Mac Host Machines](#non-mac-host-machines)
 3.  [Using the Demo Environment](#using-the-demo-environment)
@@ -36,6 +37,14 @@ components.
 If you do intend to extend this environment with your own demo components (VMs
 and roles), it's recommend that you keep the changes in version control.
 Therefor, a basic understanding of git is recommended.
+
+#### System Requirements
+
+Any workstation that will run this environment needs the following:
+
+* Multi-core, modern CPU
+* At least 4GB of free RAM. 8GB recommended
+* At least 3GB of free disk space.
 
 ## Quick Start
 
