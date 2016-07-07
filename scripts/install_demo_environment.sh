@@ -18,11 +18,11 @@ which puppet || sudo gem install puppet --no-rdoc --no-ri
 
 which librarian-puppet || sudo gem install librarian-puppet --no-rdoc --no-ri
 
-cd $demo_pwd/base/scripts
+cd $demo_pwd/scripts
 librarian-puppet install
 cd $cwd
 
-sudo FACTER_username=$username puppet apply --modulepath $demo_pwd/base/scripts/modules $demo_pwd/base/scripts/demo_requirements.pp
+sudo FACTER_username=$username puppet apply --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp
 
 
 cat <<End-of-message
