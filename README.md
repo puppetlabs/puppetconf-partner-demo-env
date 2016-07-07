@@ -6,6 +6,7 @@
     * [Who can use this tool](#who-can-use-this-tool)
        * [System Requirements](#system-requirements)
 2. [Quick Start](#quick-start)
+3.  * [Mac Host Machines](#mac-host-machines)
     * [Non-Mac Host Machines](#non-mac-host-machines)
 3.  [Using the Demo Environment](#using-the-demo-environment)
     * [Access the Puppet Server Command line](#access-the-puppet-server-command-line)
@@ -48,6 +49,8 @@ Any workstation that will run this environment needs the following:
 
 ## Quick Start
 
+### Mac Host Machines
+
 If you are using Mac OS X, the following command will install Puppet, Virtualbox, Vagrant, and the
 necessary Vagrant plugins
 
@@ -71,13 +74,15 @@ The above installation script ensures the following software is installed on you
 * vagrant-oscar plugin
 * vagrant-vbox-snapshot plugin
 
-### Non-Mac host machines
+### Non-Mac Host Mchines
 
 You will need to install the latest version of the following software:
 
 * [Vagrant](https://www.vagrantup.com)
 * [vagrant-oscar plugin](https://github.com/oscar-stack/oscar#installation)
+* [vagrant-snapshot plugin](https://github.com/dergachev/vagrant-vbox-snapshot#install) #optional but recommended
 * [Virtualbox](https://www.virtualbox.org)
+* [git](https://git-scm.com)
 
 Clone the https://github.com/puppetlabs/puppetconf-partner-demo-env repository.
 
