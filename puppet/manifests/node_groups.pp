@@ -30,11 +30,10 @@ node_group { 'PE Master':
     'pe_repo::platform::debian_7_amd64'                => {},
     'pe_repo::platform::debian_8_amd64'                => {},
     'pe_repo::platform::ubuntu_1510_amd64'             => {},
-    'pe_repo::platform::ubuntu_1504_amd64'             => {},
     'pe_repo::platform::windows_x86_64'                => {},
     'puppet_enterprise::profile::master'               => {
-      'file_sync_enabled'           => true,
-      'code_manager_auto_configure' => true,
+      'file_sync_enabled'           => false,
+      'code_manager_auto_configure' => false,
     },
     'puppet_enterprise::profile::master::mcollective'  => {},
     'puppet_enterprise::profile::mcollective::peadmin' => {},
