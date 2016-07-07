@@ -7,6 +7,7 @@ if ! [ `uname -s` == "Darwin" ]; then
   exit 1
 fi
 
+# Clone the demo environment repository
 [ -d $demo_pwd ] || git clone https://github.com/puppetlabs/puppetconf-partner-demo-env.git $demo_pwd || \
   (echo "git is not installed. Follow the XCode instructions that appeared on your screen to install git and then re-run the installer command." && exit 2)
 
@@ -14,16 +15,20 @@ fi
 echo "Type in your local password (What you use to log into you Mac):"
 sudo echo 'Installing system requirements......'
 
+# Install the Puppet gem if Puppet's not already installed
 which puppet || sudo gem install puppet --no-rdoc --no-ri
 
+# Install librarian-puppet gem if it's not already installed
 which librarian-puppet || sudo gem install librarian-puppet --no-rdoc --no-ri
 
+# Pull the required Puppet modules to set up the demo environment
 cd $demo_pwd/scripts
 librarian-puppet install
 cd $cwd
 
-sudo FACTER_username=$username puppet apply --detailed-exitcodes --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp || \
-  (echo "Puppet failed to run. Try rerunning the installer command. Please contact carl@puppet.com for help." && exit 3)
+# Run Puppet to set up the demo environment requirements
+# See demo_requirements.pp to see what manifests are being applied
+sudo FACTER_username=$username puppet apply --detailed-exitcodes --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp
 
 if [ $? == 1 ]; then
   echo "Puppet failed to set up the demo environment."
