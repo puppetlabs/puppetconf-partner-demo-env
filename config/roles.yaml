@@ -35,5 +35,5 @@ roles:
         inline: "iptables -F"
       - type: hosts
       - type: pe_agent
-        master_vm: master
+        master_vm: master.vm
 
