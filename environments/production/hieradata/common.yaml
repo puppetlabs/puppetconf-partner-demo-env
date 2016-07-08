@@ -1,0 +1,9 @@
+---
+classname::parameterstring: 'string value'
+classname::parameterboolean: true
+classname::parameterarray:
+  - value1
+  - value2
+classname::parameterhash:
+  key: value
+  ke2: value

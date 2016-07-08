@@ -3,19 +3,19 @@ node_group { 'PE Infrastructure':
   classes     => {
     'puppet_enterprise'              => {
       'use_application_services'     => true,
-      'mcollective_middleware_hosts' => ["master"],
-      'database_host'                => "master",
-      'puppetdb_host'                => 'master',
+      'mcollective_middleware_hosts' => ["master.vm"],
+      'database_host'                => "master.vm",
+      'puppetdb_host'                => 'master.vm',
       'database_port'                => '5432',
       'database_ssl'                 => true,
-      'puppet_master_host'           => 'master',
-      'certificate_authority_host'   => 'master',
+      'puppet_master_host'           => 'master.vm',
+      'certificate_authority_host'   => 'master.vm',
       'console_port'                 => '443',
       'puppetdb_database_name'       => 'pe-puppetdb',
       'puppetdb_database_user'       => 'pe-puppetdb',
-      'pcp_broker_host'              => 'master',
+      'pcp_broker_host'              => 'master.vm',
       'puppetdb_port'                => '8081',
-      'console_host'                 => 'master'
+      'console_host'                 => 'master.vm'
     },
   },
   environment => 'production',
@@ -32,6 +32,7 @@ node_group { 'PE Master':
     'pe_repo::platform::ubuntu_1510_amd64'             => {},
     'pe_repo::platform::windows_x86_64'                => {},
     'puppet_enterprise::profile::master'               => {
+      'environmentpath'             => '/vagrant/environments',
       'file_sync_enabled'           => false,
       'code_manager_auto_configure' => false,
     },
