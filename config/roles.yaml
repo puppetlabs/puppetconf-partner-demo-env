@@ -24,6 +24,12 @@ roles:
           /opt/puppetlabs/puppet/bin/puppet apply \
             --modulepath /vagrant/config/puppet/modules:/opt/puppetlabs/puppet/modules \
             /vagrant/config/puppet/manifests
+      - type: shell
+        inline: |-
+          /opt/puppetlabs/bin/puppet agent -t --detailed-exitcodes
+          if [ $? -ne 1 ] && [ $? -ne 0 ]; then
+            exit 1
+          fi
   agent:
     private_networks:
       - ip: '0.0.0.0'
