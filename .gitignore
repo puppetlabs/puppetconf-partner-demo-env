@@ -1,6 +1,7 @@
 .vagrant
 .pe_build
 puppet/Puppetfile.lock
-modules/
+config/puppet/modules/
+scripts/modules/
 .tmp
 .librarian
