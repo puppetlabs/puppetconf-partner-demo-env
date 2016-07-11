@@ -3,4 +3,4 @@ this directory from version control, or you can use the `puppet module` tool.
 
 To install a Forge module to this directory, use the following command:
 
-  $ puppet module install namespace/modulename --target-dir ./
+        $ puppet module install namespace/modulename --target-dir ./
