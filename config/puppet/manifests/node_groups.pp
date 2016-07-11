@@ -41,7 +41,7 @@ node_group { 'PE Master':
   },
   environment          => 'production',
   parent               => 'PE Infrastructure',
-  rule                 => [ "or", [ "=", "name", $::hostname] ],
+  rule                 => [ "or", [ "=", "name", $::fqdn] ],
   require              => Exec['update classifier'],
 }
 
