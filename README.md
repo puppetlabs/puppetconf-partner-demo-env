@@ -16,6 +16,7 @@
     * [Adding VMs](#adding-vms)
     * [Adding VM Roles](#adding-vm-roles)
     * [Adding Vagrant Boxes](#adding-vagrant-boxes)
+    * [Adding Your Own Puppet Code](#adding-your-own-puppet-code)
     * [Modifying the PE Master](#modifying-the-pe-master)
         * [Puppetfile](#puppetfile)
 
@@ -164,6 +165,7 @@ This demo environment can be extended by
 * Adding virtual machines
 * Adding roles to auto-configure VMs upon creation
 * Adding VM images
+* Adding yor own Puppet code
 
 ### Adding VMs
 
@@ -224,6 +226,25 @@ of boxes using the following format.
           'rhel-70-x64-vbox': 'http://example.com/rhel-70.virtualbox.box'
 
 Now your VM definitions can specify *rhel-70-x64-vbox* for the *box* parameter.
+
+### Adding your own Puppet code
+
+If you'd like to add your own Puppet code to, for example, manage your demo
+VMs, you can do so in the environments/<environment> directory. Each directory
+inside the `environments` directory automatically creates a corresponding
+environment on the Puppet master.  Most demos will just need to use the default
+`production` environment.
+
+Inside each environment, you'll find a few important directories. The
+*manifests* directory holds the site.pp file which is the global Puppet code
+that will be applied to every single Puppet run. Usually the only things that
+go in here are [node definitions](https://docs.puppet.com/puppet/latest/reference/lang_node_definitions.html) and [application declarations](https://docs.puppet.com/pe/latest/app_orchestration_declare_instance.html).
+
+The *modules* directory holds all of the Puppet modules you want available for
+the classification in the Console or for use in your roles and profiles.
+
+The *site* directory holds two important directories: *role* and *profile*.
+These directories are Puppet modules for implimenting the [roles and profiles pattern](https://docs.puppet.com/pe/latest/puppet_assign_configurations.html#assigning-configuration-data-with-role-and-profile-modules)
 
 ### Modifying the PE master
 
