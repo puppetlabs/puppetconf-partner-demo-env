@@ -1,6 +1,7 @@
 demo_pwd="`pwd`/puppetconf-partner-demo-env"
 cwd=`pwd`
 username=`whoami`
+use_sudo=$(which rvm 1>/dev/null 2>&1 && echo '' || echo 'sudo ')
 
 if ! [ `uname -s` == "Darwin" ]; then
   echo "This install script only works on Mac OS X"
@@ -13,13 +14,13 @@ fi
 
 # Make sure we have sudo permissions
 echo "Type in your local password (What you use to log into you Mac):"
-sudo echo 'Installing system requirements......'
+$use_sudo echo 'Installing system requirements......'
 
 # Install the Puppet gem if Puppet's not already installed
-which puppet || sudo gem install puppet --no-rdoc --no-ri
+$use_sudo which puppet || gem install puppet --no-rdoc --no-ri
 
 # Install librarian-puppet gem if it's not already installed
-which librarian-puppet || sudo gem install librarian-puppet --no-rdoc --no-ri
+$use_sudo which librarian-puppet || gem install librarian-puppet --no-rdoc --no-ri
 
 # Pull the required Puppet modules to set up the demo environment
 cd $demo_pwd/scripts
@@ -28,7 +29,7 @@ cd $cwd
 
 # Run Puppet to set up the demo environment requirements
 # See demo_requirements.pp to see what manifests are being applied
-sudo FACTER_username=$username puppet apply --detailed-exitcodes --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp
+$use_sudo FACTER_username=$username puppet apply --detailed-exitcodes --modulepath $demo_pwd/scripts/modules $demo_pwd/scripts/demo_requirements.pp
 
 if [ $? == 1 ]; then
   echo "Puppet failed to set up the demo environment."
