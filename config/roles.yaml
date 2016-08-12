@@ -42,4 +42,18 @@ roles:
       - type: hosts
       - type: pe_agent
         master_vm: master.vm
-
+  cumulus_agent:
+    private_networks:
+      - ip: '0.0.0.0'
+        auto_network: true
+    providers:
+      - type: virtualbox
+    provisioners:
+      - type: hosts
+      - type: shell
+        inline: |-
+          wget http://apt.puppetlabs.com/puppetlabs-release-pc1-cumulus.deb
+          dpkg -i puppetlabs-release-pc1-cumulus.deb
+          apt-get update
+          apt-get install puppet-agent
+          puppet config set server master.vm
